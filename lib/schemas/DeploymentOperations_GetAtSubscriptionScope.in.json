@@ -1,0 +1,24 @@
+{
+    "type": "object",
+    "properties": {
+        "deploymentName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "operationId": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

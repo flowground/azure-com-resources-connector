@@ -1,0 +1,196 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "resourceProviderNamespace": {
+            "required": true,
+            "type": "string"
+        },
+        "parentResourcePath": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceType": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "Specified resource.",
+                    "properties": {
+                        "id": {
+                            "description": "Resource ID",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "location": {
+                            "description": "Resource location",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags",
+                            "type": "object"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Resource information.",
+            "properties": {
+                "identity": {
+                    "description": "The identity of the resource.",
+                    "properties": {
+                        "principalId": {
+                            "description": "The principal ID of resource identity.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "tenantId": {
+                            "description": "The tenant ID of resource.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "The identity type.",
+                            "enum": [
+                                "SystemAssigned",
+                                "UserAssigned",
+                                "SystemAssigned, UserAssigned",
+                                "None"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "ResourceIdentityType"
+                            }
+                        },
+                        "userAssignedIdentities": {
+                            "additionalProperties": {
+                                "properties": {
+                                    "clientId": {
+                                        "description": "The client id of user assigned identity.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                    },
+                                    "principalId": {
+                                        "description": "The principal id of user assigned identity.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "kind": {
+                    "description": "The kind of the resource.",
+                    "pattern": "^[-\\w\\._,\\(\\)]+$",
+                    "type": "string"
+                },
+                "managedBy": {
+                    "description": "ID of the resource that manages this resource.",
+                    "type": "string"
+                },
+                "plan": {
+                    "description": "The plan of the resource.",
+                    "properties": {
+                        "name": {
+                            "description": "The plan ID.",
+                            "type": "string"
+                        },
+                        "product": {
+                            "description": "The offer ID.",
+                            "type": "string"
+                        },
+                        "promotionCode": {
+                            "description": "The promotion code.",
+                            "type": "string"
+                        },
+                        "publisher": {
+                            "description": "The publisher ID.",
+                            "type": "string"
+                        },
+                        "version": {
+                            "description": "The plan's version.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "properties": {
+                    "description": "The resource properties.",
+                    "type": "object"
+                },
+                "sku": {
+                    "description": "The SKU of the resource.",
+                    "properties": {
+                        "capacity": {
+                            "description": "The SKU capacity.",
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "family": {
+                            "description": "The SKU family.",
+                            "type": "string"
+                        },
+                        "model": {
+                            "description": "The SKU model.",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "The SKU name.",
+                            "type": "string"
+                        },
+                        "size": {
+                            "description": "The SKU size.",
+                            "type": "string"
+                        },
+                        "tier": {
+                            "description": "The SKU tier.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

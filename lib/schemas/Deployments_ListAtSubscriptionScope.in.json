@@ -1,0 +1,22 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "_filter": {
+            "required": false,
+            "type": "string"
+        },
+        "_top": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

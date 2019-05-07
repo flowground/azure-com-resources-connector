@@ -1,0 +1,917 @@
+{
+    "title": "ResourceManagementClient",
+    "description": "Provides operations for working with resources and resource groups.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/resources/2018-05-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "Lists all of the available Microsoft.Resources REST API operations.",
+            "description": "Lists all of the available Microsoft.Resources REST API operations.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Providers_List": {
+            "main": "./lib/actions/Providers_List.js",
+            "title": "Gets all resource providers for a subscription.",
+            "description": "Gets all resource providers for a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Providers_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_ListAtSubscriptionScope": {
+            "main": "./lib/actions/Deployments_ListAtSubscriptionScope.js",
+            "title": "Get all the deployments for a subscription.",
+            "description": "Get all the deployments for a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_ListAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_DeleteAtSubscriptionScope": {
+            "main": "./lib/actions/Deployments_DeleteAtSubscriptionScope.js",
+            "title": "Deletes a deployment from the deployment history.",
+            "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_DeleteAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_GetAtSubscriptionScope": {
+            "main": "./lib/actions/Deployments_GetAtSubscriptionScope.js",
+            "title": "Gets a deployment.",
+            "description": "Gets a deployment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_GetAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_CheckExistenceAtSubscriptionScope": {
+            "main": "./lib/actions/Deployments_CheckExistenceAtSubscriptionScope.js",
+            "title": "Checks whether the deployment exists.",
+            "description": "Checks whether the deployment exists.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_CheckExistenceAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_CreateOrUpdateAtSubscriptionScope": {
+            "main": "./lib/actions/Deployments_CreateOrUpdateAtSubscriptionScope.js",
+            "title": "Deploys resources at subscription scope.",
+            "description": "You can provide the template and parameters directly in the request or link to JSON files.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_CreateOrUpdateAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_CancelAtSubscriptionScope": {
+            "main": "./lib/actions/Deployments_CancelAtSubscriptionScope.js",
+            "title": "Cancels a currently running template deployment.",
+            "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_CancelAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_ExportTemplateAtSubscriptionScope": {
+            "main": "./lib/actions/Deployments_ExportTemplateAtSubscriptionScope.js",
+            "title": "Exports the template used for specified deployment.",
+            "description": "Exports the template used for specified deployment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_ExportTemplateAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeploymentOperations_ListAtSubscriptionScope": {
+            "main": "./lib/actions/DeploymentOperations_ListAtSubscriptionScope.js",
+            "title": "Gets all deployments operations for a deployment.",
+            "description": "Gets all deployments operations for a deployment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeploymentOperations_ListAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeploymentOperations_GetAtSubscriptionScope": {
+            "main": "./lib/actions/DeploymentOperations_GetAtSubscriptionScope.js",
+            "title": "Gets a deployments operation.",
+            "description": "Gets a deployments operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeploymentOperations_GetAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_ValidateAtSubscriptionScope": {
+            "main": "./lib/actions/Deployments_ValidateAtSubscriptionScope.js",
+            "title": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
+            "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_ValidateAtSubscriptionScope.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Providers_Get": {
+            "main": "./lib/actions/Providers_Get.js",
+            "title": "Gets the specified resource provider.",
+            "description": "Gets the specified resource provider.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Providers_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Providers_Register": {
+            "main": "./lib/actions/Providers_Register.js",
+            "title": "Registers a subscription with a resource provider.",
+            "description": "Registers a subscription with a resource provider.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Providers_Register.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Providers_Unregister": {
+            "main": "./lib/actions/Providers_Unregister.js",
+            "title": "Unregisters a subscription from a resource provider.",
+            "description": "Unregisters a subscription from a resource provider.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Providers_Unregister.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_ListByResourceGroup": {
+            "main": "./lib/actions/Resources_ListByResourceGroup.js",
+            "title": "Get all the resources for a resource group.",
+            "description": "Get all the resources for a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_MoveResources": {
+            "main": "./lib/actions/Resources_MoveResources.js",
+            "title": "Moves resources from one resource group to another resource group.",
+            "description": "The resources to move must be in the same source resource group. The target resource group may be in a different subscription. When moving resources, both the source group and the target group are locked for the duration of the operation. Write and delete operations are blocked on the groups until the move completes. ",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_MoveResources.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_ValidateMoveResources": {
+            "main": "./lib/actions/Resources_ValidateMoveResources.js",
+            "title": "Validates whether resources can be moved from one resource group to another resource group.",
+            "description": "This operation checks whether the specified resources can be moved to the target. The resources to move must be in the same source resource group. The target resource group may be in a different subscription. If validation succeeds, it returns HTTP response code 204 (no content). If validation fails, it returns HTTP response code 409 (Conflict) with an error message. Retrieve the URL in the Location header value to check the result of the long-running operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_ValidateMoveResources.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ResourceGroups_List": {
+            "main": "./lib/actions/ResourceGroups_List.js",
+            "title": "Gets all the resource groups for a subscription.",
+            "description": "Gets all the resource groups for a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ResourceGroups_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ResourceGroups_Delete": {
+            "main": "./lib/actions/ResourceGroups_Delete.js",
+            "title": "Deletes a resource group.",
+            "description": "When you delete a resource group, all of its resources are also deleted. Deleting a resource group deletes all of its template deployments and currently stored operations.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ResourceGroups_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ResourceGroups_Get": {
+            "main": "./lib/actions/ResourceGroups_Get.js",
+            "title": "Gets a resource group.",
+            "description": "Gets a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ResourceGroups_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ResourceGroups_CheckExistence": {
+            "main": "./lib/actions/ResourceGroups_CheckExistence.js",
+            "title": "Checks whether a resource group exists.",
+            "description": "Checks whether a resource group exists.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ResourceGroups_CheckExistence.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ResourceGroups_Update": {
+            "main": "./lib/actions/ResourceGroups_Update.js",
+            "title": "Updates a resource group.",
+            "description": "Resource groups can be updated through a simple PATCH operation to a group address. The format of the request is the same as that for creating a resource group. If a field is unspecified, the current value is retained.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ResourceGroups_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ResourceGroups_CreateOrUpdate": {
+            "main": "./lib/actions/ResourceGroups_CreateOrUpdate.js",
+            "title": "Creates or updates a resource group.",
+            "description": "Creates or updates a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ResourceGroups_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeploymentOperations_List": {
+            "main": "./lib/actions/DeploymentOperations_List.js",
+            "title": "Gets all deployments operations for a deployment.",
+            "description": "Gets all deployments operations for a deployment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeploymentOperations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeploymentOperations_Get": {
+            "main": "./lib/actions/DeploymentOperations_Get.js",
+            "title": "Gets a deployments operation.",
+            "description": "Gets a deployments operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeploymentOperations_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ResourceGroups_ExportTemplate": {
+            "main": "./lib/actions/ResourceGroups_ExportTemplate.js",
+            "title": "Captures the specified resource group as a template.",
+            "description": "Captures the specified resource group as a template.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ResourceGroups_ExportTemplate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_ListByResourceGroup": {
+            "main": "./lib/actions/Deployments_ListByResourceGroup.js",
+            "title": "Get all the deployments for a resource group.",
+            "description": "Get all the deployments for a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_Delete": {
+            "main": "./lib/actions/Deployments_Delete.js",
+            "title": "Deletes a deployment from the deployment history.",
+            "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. Deleting a template deployment does not affect the state of the resource group. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_Get": {
+            "main": "./lib/actions/Deployments_Get.js",
+            "title": "Gets a deployment.",
+            "description": "Gets a deployment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_CheckExistence": {
+            "main": "./lib/actions/Deployments_CheckExistence.js",
+            "title": "Checks whether the deployment exists.",
+            "description": "Checks whether the deployment exists.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_CheckExistence.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_CreateOrUpdate": {
+            "main": "./lib/actions/Deployments_CreateOrUpdate.js",
+            "title": "Deploys resources to a resource group.",
+            "description": "You can provide the template and parameters directly in the request or link to JSON files.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_Cancel": {
+            "main": "./lib/actions/Deployments_Cancel.js",
+            "title": "Cancels a currently running template deployment.",
+            "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resource group partially deployed.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_Cancel.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_ExportTemplate": {
+            "main": "./lib/actions/Deployments_ExportTemplate.js",
+            "title": "Exports the template used for specified deployment.",
+            "description": "Exports the template used for specified deployment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_ExportTemplate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Deployments_Validate": {
+            "main": "./lib/actions/Deployments_Validate.js",
+            "title": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
+            "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Deployments_Validate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_Delete": {
+            "main": "./lib/actions/Resources_Delete.js",
+            "title": "Deletes a resource.",
+            "description": "Deletes a resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_Get": {
+            "main": "./lib/actions/Resources_Get.js",
+            "title": "Gets a resource.",
+            "description": "Gets a resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_CheckExistence": {
+            "main": "./lib/actions/Resources_CheckExistence.js",
+            "title": "Checks whether a resource exists.",
+            "description": "Checks whether a resource exists.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_CheckExistence.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_Update": {
+            "main": "./lib/actions/Resources_Update.js",
+            "title": "Updates a resource.",
+            "description": "Updates a resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_CreateOrUpdate": {
+            "main": "./lib/actions/Resources_CreateOrUpdate.js",
+            "title": "Creates a resource.",
+            "description": "Creates a resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_List": {
+            "main": "./lib/actions/Resources_List.js",
+            "title": "Get all the resources in a subscription.",
+            "description": "Get all the resources in a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Tags_List": {
+            "main": "./lib/actions/Tags_List.js",
+            "title": "Gets the names and values of all resource tags that are defined in a subscription.",
+            "description": "Gets the names and values of all resource tags that are defined in a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Tags_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Tags_Delete": {
+            "main": "./lib/actions/Tags_Delete.js",
+            "title": "Deletes a tag from the subscription.",
+            "description": "You must remove all values from a resource tag before you can delete it.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Tags_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Tags_CreateOrUpdate": {
+            "main": "./lib/actions/Tags_CreateOrUpdate.js",
+            "title": "Creates a tag in the subscription.",
+            "description": "The tag name can have a maximum of 512 characters and is case insensitive. Tag names created by Azure have prefixes of microsoft, azure, or windows. You cannot create tags with one of these prefixes.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Tags_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Tags_DeleteValue": {
+            "main": "./lib/actions/Tags_DeleteValue.js",
+            "title": "Deletes a tag value.",
+            "description": "Deletes a tag value.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Tags_DeleteValue.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Tags_CreateOrUpdateValue": {
+            "main": "./lib/actions/Tags_CreateOrUpdateValue.js",
+            "title": "Creates a tag value. The name of the tag must already exist.",
+            "description": "Creates a tag value. The name of the tag must already exist.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Tags_CreateOrUpdateValue.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_DeleteById": {
+            "main": "./lib/actions/Resources_DeleteById.js",
+            "title": "Deletes a resource by ID.",
+            "description": "Deletes a resource by ID.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_DeleteById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_GetById": {
+            "main": "./lib/actions/Resources_GetById.js",
+            "title": "Gets a resource by ID.",
+            "description": "Gets a resource by ID.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_GetById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_CheckExistenceById": {
+            "main": "./lib/actions/Resources_CheckExistenceById.js",
+            "title": "Checks by ID whether a resource exists.",
+            "description": "Checks by ID whether a resource exists.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_CheckExistenceById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_UpdateById": {
+            "main": "./lib/actions/Resources_UpdateById.js",
+            "title": "Updates a resource by ID.",
+            "description": "Updates a resource by ID.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_UpdateById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Resources_CreateOrUpdateById": {
+            "main": "./lib/actions/Resources_CreateOrUpdateById.js",
+            "title": "Create a resource by ID.",
+            "description": "Create a resource by ID.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Resources_CreateOrUpdateById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

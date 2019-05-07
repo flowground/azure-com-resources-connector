@@ -1,0 +1,71 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Resource group information.",
+            "properties": {
+                "id": {
+                    "description": "The ID of the resource group.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations.",
+                    "type": "string"
+                },
+                "managedBy": {
+                    "description": "The ID of the resource that manages this resource group.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource group.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "The resource group properties.",
+                    "properties": {
+                        "provisioningState": {
+                            "description": "The provisioning state. ",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    }
+                },
+                "tags": {
+                    "additionalProperties": {
+                        "description": "The additional properties. ",
+                        "type": "string"
+                    },
+                    "description": "The tags attached to the resource group.",
+                    "type": "object"
+                },
+                "type": {
+                    "description": "The type of the resource group.",
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "x-ms-azure-resource": true,
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
